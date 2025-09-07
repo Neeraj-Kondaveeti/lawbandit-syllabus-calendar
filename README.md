@@ -14,8 +14,31 @@ At this stage:
 
 ## 🛠️ How to Run the Application  
 
-### 1. Clone the repository  
+### ✅ Prerequisites  
+Before running the app, make sure you have installed:  
+- [Node.js](https://nodejs.org/) **v20.0.0 or later** (recommended: v20.19.4 or above, since Vite requires Node 20+)  
+- [npm](https://www.npmjs.com/) (comes with Node.js, version 9+ recommended)  
+- A terminal (Mac: Terminal, Windows: PowerShell, Linux: bash/zsh)  
+
+Check your versions:  
 ```bash
+node -v
+npm -v
+
+
+
+### 1. Clone the repository  
 git clone https://github.com/neeraj-kondaveeti/lawbandit-syllabus-calendar.git
 cd lawbandit-syllabus-calendar
+
+### 2. Install Dependencies 
+npm install
+
+### 3. Start the Development Server 
+npm run dev
+
+### 4. Open the application in your browser 
+http://localhost:5173/
+
+
 
