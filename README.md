@@ -8,7 +8,7 @@ At this stage:
 - 🤖 A **mock LLM function** is called (currently is only temporarily setup).  
 - 📅 Events are displayed in a calendar UI with add/edit/delete support.  
 
-⚠️ **Note**: This is not the final version. The LLM integration is mocked right now , once an API key is provided, the mock will be replaced with a real API call so the syllabus text is parsed dynamically into events.  
+⚠️ **Note**: This is not the final version. The LLM integration is mocked right now (inside src/components/SyllabusUpload.tsx) , once an API key is provided, the mock will be replaced with a real API call so the syllabus text is parsed dynamically into events.  
 
 ## Present Progress :
 <img width="1462" height="922" alt="image" src="https://github.com/user-attachments/assets/84e70d9a-4ee6-49b5-bec5-677a1a2075f7" />
