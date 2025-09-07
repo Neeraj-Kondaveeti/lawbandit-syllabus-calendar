@@ -33,20 +33,28 @@ Check your versions:
 node -v
 npm -v
 
-
+```
 
 ### 1. Clone the repository  
+```bash
 git clone https://github.com/neeraj-kondaveeti/lawbandit-syllabus-calendar.git
 cd lawbandit-syllabus-calendar
+```
 
 ### 2. Install Dependencies 
+```bash
 npm install
+```
 
 ### 3. Start the Development Server 
+```bash
 npm run dev
+```
 
 ### 4. Open the application in your browser 
+```bash
 http://localhost:5173/
+```
 
 ### 5. Open the app in your browser
 After running the dev server, you should see an output like:
@@ -63,17 +71,20 @@ Error: Vite requires Node.js 20+
 
 Port already in use (5173)
 → Stop any other dev server running on that port, or run:
+```bash
 npm run dev -- --port=3000
 and open http://localhost:3000/.
-
+```
 
 npm install fails with peer dependency issues
 → Try cleaning and reinstalling:
+```bash
 rm -rf node_modules package-lock.json
 npm install
-
+```
 
 📂 Project Structure
+```bash
 src/
  ├── components/
  │    ├── Calendar.tsx         # Main calendar UI + event state
@@ -82,7 +93,7 @@ src/
  │    ├── AddEventModal.tsx    # Modal for adding events
  │    ├── EditEventModal.tsx   # Modal for editing events
  │    └── EventDetailsModal.tsx# Event detail modal
-
+```
 
 🔮 Next Steps
 Replace fetchEventsFromLLM (mock) with a real LLM API call (once API key is available)
