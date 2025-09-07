@@ -26,8 +26,10 @@ Before running the app, make sure you have installed:
 - [npm](https://www.npmjs.com/) (comes with Node.js, version 9+ recommended)  
 - A terminal (Mac: Terminal, Windows: PowerShell, Linux: bash/zsh)  
 
-Check your versions:  
 ```bash
+Check your versions:  
+
+
 node -v
 npm -v
 
