@@ -58,12 +58,13 @@ http://localhost:5173/
 
 ### 5. Open the app in your browser
 After running the dev server, you should see an output like:
+
   ➜  Local:   http://localhost:5173/
-  ➜  Network: use --host to expose
+
 Open the Local URL in your browser to use the app.
 
 
-##⚠️ Troubleshooting
+##⚠️ Troubleshooting (If Required)
 A. Error: Vite requires Node.js 20+
 → Run node -v and upgrade Node.js if needed.
 → Download latest from nodejs.org.
