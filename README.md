@@ -84,7 +84,7 @@ rm -rf node_modules package-lock.json
 npm install
 ```
 
-📂 Project Structure
+### 📂 Project Structure
 ```bash
 src/
  ├── components/
@@ -93,16 +93,16 @@ src/
  │    ├── SyllabusUpload.tsx   # PDF upload + text extraction + mock LLM call
  │    ├── AddEventModal.tsx    # Modal for adding events
  │    ├── EditEventModal.tsx   # Modal for editing events
- │    └── EventDetailsModal.tsx# Event detail modal
+ │    └── EventDetailsModal.tsx # Event detail modal
 ```
 
-🔮 Next Steps
+### 🔮 Next Steps
 Replace fetchEventsFromLLM (mock) with a real LLM API call (once API key is available)
 Expand parsing logic to handle more syllabus formats (dates, ranges, etc.)
 Optional: integrate with Google Calendar for syncing
 
 
-✅ Concept 
+### Concept 
 This repository demonstrates:
 A working pipeline from PDF upload → text extraction → mock event injection into calendar
 An event management UI that allows add/edit/delete actions
