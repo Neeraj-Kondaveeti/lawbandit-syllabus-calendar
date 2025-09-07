@@ -64,7 +64,7 @@ After running the dev server, you should see an output like:
 Open the Local URL in your browser to use the app.
 
 
-##⚠️ Troubleshooting (If Required)
+###⚠️ Troubleshooting (If Required)
 A. Error: Vite requires Node.js 20+
 → Run node -v and upgrade Node.js if needed.
 → Download latest from nodejs.org.
