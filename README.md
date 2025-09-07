@@ -97,16 +97,16 @@ src/
 ```
 
 ### 🔮 Next Steps
-Replace fetchEventsFromLLM (mock) with a real LLM API call (once API key is available)
-Expand parsing logic to handle more syllabus formats (dates, ranges, etc.)
-Optional: integrate with Google Calendar for syncing
+- Replace fetchEventsFromLLM (mock) with a real LLM API call (once API key is available)
+- Expand parsing logic to handle more syllabus formats (dates, ranges, etc.)
+- Optional: integrate with Google Calendar for syncing
 
 
 ### Concept 
 This repository demonstrates:
-A working pipeline from PDF upload → text extraction → mock event injection into calendar
-An event management UI that allows add/edit/delete actions
-A ready spot for plugging in a real LLM call to complete the end-to-end flow
+- A working pipeline from PDF upload → text extraction → mock event injection into calendar
+- An event management UI that allows add/edit/delete actions
+- A ready spot for plugging in a real LLM call to complete the end-to-end flow
 
 
 
