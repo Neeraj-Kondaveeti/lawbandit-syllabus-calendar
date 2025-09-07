@@ -10,6 +10,12 @@ At this stage:
 
 ⚠️ **Note**: This is not the final version. The LLM integration is mocked right now , once an API key is provided, the mock will be replaced with a real API call so the syllabus text is parsed dynamically into events.  
 
+## Present Progress :
+<img width="1462" height="922" alt="image" src="https://github.com/user-attachments/assets/84e70d9a-4ee6-49b5-bec5-677a1a2075f7" />
+
+**Note** This will be further developed , this is only the current stage.
+
+
 ---
 
 ## 🛠️ How to Run the Application  
