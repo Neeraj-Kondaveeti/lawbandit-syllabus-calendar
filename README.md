@@ -5,10 +5,10 @@ This project is a **work-in-progress application** that takes a syllabus PDF and
 At this stage:  
 - 📂 You can upload a syllabus (PDF).  
 - 🧾 Text is extracted using **pdfjs-dist**.  
-- 🤖 A **mock LLM function** is called (currently returns sample events).  
+- 🤖 A **mock LLM function** is called (currently is only temporarily setup).  
 - 📅 Events are displayed in a calendar UI with add/edit/delete support.  
 
-⚠️ **Note**: This is not the final version. The LLM integration is mocked right now — once an API key is provided, the mock will be replaced with a real API call so the syllabus text is parsed dynamically into events.  
+⚠️ **Note**: This is not the final version. The LLM integration is mocked right now , once an API key is provided, the mock will be replaced with a real API call so the syllabus text is parsed dynamically into events.  
 
 ---
 
@@ -78,17 +78,12 @@ Expand parsing logic to handle more syllabus formats (dates, ranges, etc.)
 Optional: integrate with Google Calendar for syncing
 
 
-✅ Proof of Concept Status
+✅ Concept 
 This repository demonstrates:
 A working pipeline from PDF upload → text extraction → mock event injection into calendar
 An event management UI that allows add/edit/delete actions
 A ready spot for plugging in a real LLM call to complete the end-to-end flow
 
----
-
-✅ This is clean, professional, and has **everything in one place** — your reviewer will instantly understand what’s done, what’s pending, and how to run the project.  
-
-Do you also want me to draft the **exact message you’ll send with the GitHub repo link** so it matches the tone of this README?
 
 
 
