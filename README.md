@@ -63,20 +63,20 @@ After running the dev server, you should see an output like:
 Open the Local URL in your browser to use the app.
 
 
-⚠️ Troubleshooting
-Error: Vite requires Node.js 20+
+##⚠️ Troubleshooting
+A. Error: Vite requires Node.js 20+
 → Run node -v and upgrade Node.js if needed.
 → Download latest from nodejs.org.
 
 
-Port already in use (5173)
+B. Port already in use (5173)
 → Stop any other dev server running on that port, or run:
 ```bash
 npm run dev -- --port=3000
 and open http://localhost:3000/.
 ```
 
-npm install fails with peer dependency issues
+C. npm install fails with peer dependency issues
 → Try cleaning and reinstalling:
 ```bash
 rm -rf node_modules package-lock.json
