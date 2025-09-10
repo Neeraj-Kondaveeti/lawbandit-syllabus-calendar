@@ -5,9 +5,6 @@ declare const google: any;
 
 let isGapiLoaded = false;
 
-/**
- * Initialize Google Calendar API client
- */
 export async function initGoogleCalendar() {
   return new Promise<void>((resolve, reject) => {
     if (isGapiLoaded) return resolve();
@@ -15,7 +12,7 @@ export async function initGoogleCalendar() {
     gapi.load("client", async () => {
       try {
         await gapi.client.init({
-          apiKey: import.meta.env.VITE_GOOGLE_API_KEY, // optional but useful
+          apiKey: import.meta.env.VITE_GOOGLE_API_KEY, // optional but helps
           discoveryDocs: [
             "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest",
           ],
@@ -29,9 +26,6 @@ export async function initGoogleCalendar() {
   });
 }
 
-/**
- * Sign in and get an access token using OAuth 2.0
- */
 export async function signInToGoogle() {
   return new Promise<void>((resolve, reject) => {
     const client = google.accounts.oauth2.initTokenClient({
@@ -41,8 +35,8 @@ export async function signInToGoogle() {
         if (resp.error) {
           reject(resp);
         } else {
-          gapi.client.setToken({ access_token: resp.access_token });
-          console.log("✅ Signed in, received token:", resp);
+          gapi.client.setToken({ access_token: resp.access_token }); // ✅ fix
+          console.log("Signed in, received token:", resp);
           resolve();
         }
       },
@@ -52,15 +46,7 @@ export async function signInToGoogle() {
   });
 }
 
-/**
- * Add multiple events to Google Calendar
- */
 export async function addEventsToGoogleCalendar(events: any[]) {
-  if (!Array.isArray(events)) {
-    console.error("❌ addEventsToGoogleCalendar expected an array, got:", events);
-    throw new Error("Events must be an array");
-  }
-
   await initGoogleCalendar();
   await signInToGoogle();
 
@@ -72,15 +58,10 @@ export async function addEventsToGoogleCalendar(events: any[]) {
       end: { date: ev.dateKey },
     };
 
-    try {
-      const response = await gapi.client.calendar.events.insert({
-        calendarId: "primary",
-        resource: event,
-      });
-      console.log("📅 Event added:", response);
-    } catch (err) {
-      console.error("❌ Failed to insert event:", ev, err);
-    }
+    await gapi.client.calendar.events.insert({
+      calendarId: "primary",
+      resource: event,
+    });
   }
 
   alert("✅ Events added to your Google Calendar!");

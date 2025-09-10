@@ -7,9 +7,8 @@ type Props = {
   dayKey: string;
   index: number;
   event: EventItem;
-  onClick: () => void;
+  onView: (index: number) => void; // ✅ use centralized modal
 };
-
 
 const categoryColors: Record<string, string> = {
   Exam: "from-red-500 to-red-700",
@@ -19,7 +18,7 @@ const categoryColors: Record<string, string> = {
   General: "from-gray-500 to-gray-700",
 };
 
-export default function DraggableEvent({ dayKey, index, event, onClick }: Props) {
+export default function DraggableEvent({ dayKey, index, event, onView }: Props) {
   const { attributes, listeners, setNodeRef } = useDraggable({
     id: `${dayKey}-${index}`,
     data: { fromKey: dayKey, eventIndex: index },
@@ -38,7 +37,7 @@ export default function DraggableEvent({ dayKey, index, event, onClick }: Props)
       transition={{ duration: 0.25 }}
       className={`px-2 py-1 rounded-md bg-gradient-to-r ${colorClass} 
       text-white shadow-md cursor-grab active:cursor-grabbing hover:scale-105 transform transition`}
-      onClick={onClick}
+      onClick={() => onView(index)} // ✅ delegate to Calendar
     >
       <span className="truncate">{event.title}</span>
     </motion.div>

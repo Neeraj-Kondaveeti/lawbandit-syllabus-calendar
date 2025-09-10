@@ -4,19 +4,25 @@ import WeekdayHeader from "./WeekdayHeader";
 import DayCell from "./DayCell";
 import AddEventModal from "./AddEventModal";
 import EditEventModal from "./EditEventModal";
+import EventDetailsModal from "./EventDetailsModal";
 import SyllabusUpload from "./SyllabusUpload";
-
 
 export type EventItem = {
   title: string;
-  dateKey: string; 
+  dateKey: string;
   category: string;
+  details?: string;
 };
 
-export default function Calendar() {
+type CalendarProps = {
+  events: Record<string, EventItem[]>;
+  setEvents: React.Dispatch<React.SetStateAction<Record<string, EventItem[]>>>;
+};
+
+export default function Calendar({ events, setEvents }: CalendarProps) {
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
-  const [events, setEvents] = useState<Record<string, EventItem[]>>({});
+
   const [showAddEventModal, setShowAddEventModal] = useState(false);
   const [editingEvent, setEditingEvent] = useState<{
     key: string;
@@ -24,67 +30,77 @@ export default function Calendar() {
     event: EventItem;
   } | null>(null);
 
+  const [selectedEvent, setSelectedEvent] = useState<{
+    key: string;
+    index: number;
+    event: EventItem;
+  } | null>(null);
 
-  const handleAddEvent = (dateKey: string, title: string, category: string) => {
+  const handleAddEvent = (
+    dateKey: string,
+    title: string,
+    category: string,
+    details: string
+  ) => {
     setEvents((prev) => {
       const updated = { ...prev };
       if (!updated[dateKey]) updated[dateKey] = [];
-      updated[dateKey] = [...updated[dateKey], { title, dateKey, category }];
-      console.log("📌 Added new event:", updated[dateKey]);
+      updated[dateKey] = [
+        ...updated[dateKey],
+        { title, dateKey, category, details },
+      ];
       return updated;
     });
   };
-
 
   const handleDeleteEvent = (key: string, index: number) => {
     setEvents((prev) => {
       const updated = { ...prev };
       updated[key] = updated[key].filter((_, i) => i !== index);
       if (updated[key].length === 0) delete updated[key];
-      console.log("🗑️ After delete, events:", updated);
       return updated;
     });
+    setSelectedEvent(null);
   };
 
- 
-  const handleUpdateEvent = (key: string, index: number, updatedEvent: EventItem) => {
+  const handleUpdateEvent = (
+    key: string,
+    index: number,
+    updatedEvent: EventItem
+  ) => {
     setEvents((prev) => {
       const updated = { ...prev };
-      updated[key] = updated[key].map((ev, i) => (i === index ? updatedEvent : ev));
-      console.log("✏️ After update, events:", updated);
+      updated[key] = updated[key].map((ev, i) =>
+        i === index ? updatedEvent : ev
+      );
       return updated;
     });
+    setEditingEvent(null);
   };
 
-  
   const handleParsedEvents = (parsed: Record<string, EventItem[]>) => {
     const normalized: Record<string, EventItem[]> = {};
     Object.keys(parsed).forEach((k) => {
       normalized[k] = parsed[k].map((e) => ({
         ...e,
         category: e.category || "General",
+        details: e.details || "",
       }));
     });
 
-    console.log("📥 Parsed syllabus events:", normalized);
-
     setEvents((prev) => {
       const merged = { ...prev, ...normalized };
-      console.log("✅ Events after merge:", merged);
       return merged;
     });
 
-  
     const firstDateKey = Object.keys(normalized)[0];
     if (firstDateKey) {
       const [year, month] = firstDateKey.split("-");
       setCurrentYear(Number(year));
-      setCurrentMonth(Number(month) - 1); // months are 0-based
-      console.log("📆 Jumped to:", year, month);
+      setCurrentMonth(Number(month) - 1);
     }
   };
 
-  
   const firstDay = new Date(currentYear, currentMonth, 1).getDay();
   const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
 
@@ -98,7 +114,8 @@ export default function Calendar() {
       week = [];
     }
   }
-  if (week.length > 0) weeks.push([...week, ...new Array(7 - week.length).fill(null)]);
+  if (week.length > 0)
+    weeks.push([...week, ...new Array(7 - week.length).fill(null)]);
 
   return (
     <div className="p-4">
@@ -119,9 +136,10 @@ export default function Calendar() {
           week.map((day, di) => {
             const key =
               day !== null
-                ? `${currentYear}-${String(currentMonth + 1).padStart(2, "0")}-${String(
-                    day
-                  ).padStart(2, "0")}`
+                ? `${currentYear}-${String(currentMonth + 1).padStart(
+                    2,
+                    "0"
+                  )}-${String(day).padStart(2, "0")}`
                 : `empty-${wi}-${di}`;
 
             return (
@@ -130,10 +148,13 @@ export default function Calendar() {
                 day={day}
                 dayKey={key}
                 events={day ? events[key] || [] : []}
-                onEdit={(index) =>
+                onView={(index: number) =>
+                  setSelectedEvent({ key, index, event: events[key][index] })
+                }
+                onEdit={(index: number) =>
                   setEditingEvent({ key, index, event: events[key][index] })
                 }
-                onDelete={(index) => handleDeleteEvent(key, index)}
+                onDelete={(index: number) => handleDeleteEvent(key, index)}
               />
             );
           })
@@ -144,8 +165,8 @@ export default function Calendar() {
       {showAddEventModal && (
         <AddEventModal
           onClose={() => setShowAddEventModal(false)}
-          onSave={(dateKey, title, category) => {
-            handleAddEvent(dateKey, title, category);
+          onSave={(dateKey, title, category, details) => {
+            handleAddEvent(dateKey, title, category, details);
             setShowAddEventModal(false);
           }}
         />
@@ -158,6 +179,22 @@ export default function Calendar() {
           onClose={() => setEditingEvent(null)}
           onSave={(updated) =>
             handleUpdateEvent(editingEvent.key, editingEvent.index, updated)
+          }
+        />
+      )}
+
+      {/* Event Details Modal */}
+      {selectedEvent && (
+        <EventDetailsModal
+          event={selectedEvent.event}
+          date={new Date(selectedEvent.event.dateKey).toDateString()}
+          onClose={() => setSelectedEvent(null)}
+          onEdit={() => {
+            setEditingEvent(selectedEvent);
+            setSelectedEvent(null);
+          }}
+          onDelete={() =>
+            handleDeleteEvent(selectedEvent.key, selectedEvent.index)
           }
         />
       )}

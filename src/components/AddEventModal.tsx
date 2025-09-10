@@ -2,13 +2,14 @@ import React, { useState } from "react";
 
 type Props = {
   onClose: () => void;
-  onSave: (dateKey: string, title: string, category: string) => void;
+  onSave: (dateKey: string, title: string, category: string, details: string) => void;
 };
 
 export default function AddEventModal({ onClose, onSave }: Props) {
   const [dateKey, setDateKey] = useState("");
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("General");
+  const [details, setDetails] = useState(""); // ✅ new state for details
 
   const handleSave = () => {
     if (!dateKey || !title) return;
@@ -16,8 +17,11 @@ export default function AddEventModal({ onClose, onSave }: Props) {
     const dateObj = new Date(dateKey);
     if (isNaN(dateObj.getTime())) return;
 
-    const normalizedKey = `${dateObj.getFullYear()}-${dateObj.getMonth() + 1}-${dateObj.getDate()}`;
-    onSave(normalizedKey, title, category);
+    const normalizedKey = `${dateObj.getFullYear()}-${String(
+      dateObj.getMonth() + 1
+    ).padStart(2, "0")}-${String(dateObj.getDate()).padStart(2, "0")}`;
+
+    onSave(normalizedKey, title, category, details);
     onClose();
   };
 
@@ -29,6 +33,7 @@ export default function AddEventModal({ onClose, onSave }: Props) {
         </h2>
 
         <div className="flex flex-col gap-3">
+          {/* Date */}
           <input
             type="date"
             value={dateKey}
@@ -37,6 +42,7 @@ export default function AddEventModal({ onClose, onSave }: Props) {
             required
           />
 
+          {/* Title */}
           <input
             type="text"
             placeholder="Event title"
@@ -46,7 +52,7 @@ export default function AddEventModal({ onClose, onSave }: Props) {
             required
           />
 
-          {/* ✅ Category dropdown */}
+          {/* Category */}
           <select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
@@ -59,6 +65,16 @@ export default function AddEventModal({ onClose, onSave }: Props) {
             <option value="General">General</option>
           </select>
 
+          {/* Details (NEW) */}
+          <textarea
+            placeholder="Details (e.g., chapters, readings, notes)"
+            value={details}
+            onChange={(e) => setDetails(e.target.value)}
+            className="border p-2 rounded dark:bg-gray-700 dark:text-white resize-none"
+            rows={3}
+          />
+
+          {/* Buttons */}
           <div className="flex justify-end gap-2 mt-4">
             <button
               type="button"

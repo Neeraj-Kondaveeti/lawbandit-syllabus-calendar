@@ -1,85 +1,65 @@
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { useDroppable } from "@dnd-kit/core"; 
+import React from "react";
 import { EventItem } from "./Calendar";
-import EventDetailsModal from "./EventDetailsModal";
 
 type Props = {
   day: number | null;
   dayKey: string;
   events: EventItem[];
+  onView: (index: number) => void;
   onEdit: (index: number) => void;
   onDelete: (index: number) => void;
 };
 
-export default function DayCell({ day, dayKey, events, onEdit, onDelete }: Props) {
-  const today = new Date();
-  const isToday =
-    day &&
-    day === today.getDate() &&
-    today.getMonth() === new Date().getMonth() &&
-    today.getFullYear() === new Date().getFullYear();
+const categoryColors: Record<string, string> = {
+  Exam: "from-red-500 to-red-700",
+  Assignment: "from-blue-500 to-blue-700",
+  Lecture: "from-green-500 to-green-700",
+  Project: "from-purple-500 to-purple-700",
+  General: "from-gray-500 to-gray-700",
+};
 
-  const { setNodeRef } = useDroppable({ id: dayKey });
-  const [selectedEvent, setSelectedEvent] = useState<{
-    event: EventItem;
-    index: number;
-  } | null>(null);
+// ✅ helper: icons for categories
+function getCategoryIcon(category: string) {
+  switch (category) {
+    case "Exam": return "🎓";
+    case "Assignment": return "📄";
+    case "Lecture": return "📘";
+    case "Project": return "🎯";
+    default: return "📌";
+  }
+}
 
+export default function DayCell({ day, dayKey, events, onView }: Props) {
   return (
-    <motion.div
-      ref={setNodeRef}
-      whileHover={{ scale: 1.02, boxShadow: "0px 4px 12px rgba(0,0,0,0.15)" }}
-      transition={{ type: "spring", stiffness: 200, damping: 12 }}
-      className="h-32 p-2 border border-gray-200 dark:border-gray-700 
-      bg-white dark:bg-gray-900 rounded-lg relative"
+    <div
+      className={`min-h-[100px] bg-white dark:bg-gray-900 p-2 border border-gray-200 dark:border-gray-700 relative 
+                  hover:bg-gray-50 dark:hover:bg-gray-800 transition`}
     >
-      {/* Day number */}
+      {/* Day Number */}
       {day && (
-        <div
-          className={`w-7 h-7 flex items-center justify-center text-sm font-semibold rounded-full 
-          ${isToday ? "bg-blue-600 text-white" : "text-gray-800 dark:text-gray-200"}`}
-        >
+        <div className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
           {day}
         </div>
       )}
 
       {/* Events */}
-      <div className="mt-1 space-y-1">
-        <AnimatePresence>
-          {events.map((event, index) => (
-            <motion.div
+      <div className="space-y-1">
+        {events.map((event, index) => {
+          const colorClass = categoryColors[event.category] || categoryColors.General;
+          return (
+            <div
               key={index}
-              initial={{ opacity: 0, y: 10, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -10, scale: 0.95 }}
-              transition={{ duration: 0.2 }}
-              className="px-2 py-1 rounded-md bg-gradient-to-r from-purple-500 to-indigo-500 
-              text-white shadow-md cursor-pointer truncate overflow-hidden max-h-6"
-              onClick={() => setSelectedEvent({ event, index })}
+              className={`flex items-center gap-1 px-2 py-1 rounded-md bg-gradient-to-r ${colorClass} 
+                          text-white text-xs font-medium shadow cursor-pointer truncate 
+                          hover:scale-[1.02] transform transition`}
+              onClick={() => onView(index)}
             >
-              <span className="block truncate max-w-full">{event.title}</span>
-            </motion.div>
-          ))}
-        </AnimatePresence>
+              <span>{getCategoryIcon(event.category)}</span>
+              <span className="truncate">{event.title}</span>
+            </div>
+          );
+        })}
       </div>
-
-      {/* Event details modal */}
-      {selectedEvent && (
-        <EventDetailsModal
-          event={selectedEvent.event}
-          date={new Date(selectedEvent.event.dateKey).toDateString()}
-          onClose={() => setSelectedEvent(null)}
-          onEdit={() => {
-            onEdit(selectedEvent.index);
-            setSelectedEvent(null);
-          }}
-          onDelete={() => {
-            onDelete(selectedEvent.index);
-            setSelectedEvent(null);
-          }}
-        />
-      )}
-    </motion.div>
+    </div>
   );
 }

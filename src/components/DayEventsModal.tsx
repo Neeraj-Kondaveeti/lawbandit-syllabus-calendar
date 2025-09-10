@@ -11,8 +11,14 @@ type Props = {
 
 export default function DayEventsModal({ events, date, onClose, onEdit, onDelete }: Props) {
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-      <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-96 animate-fadeIn">
+    <div
+      className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
+      onClick={onClose}
+    >
+      <div
+        className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-96 animate-fadeIn"
+        onClick={(e) => e.stopPropagation()}
+      >
         <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-3">
           Events on {date}
         </h2>
@@ -40,6 +46,9 @@ export default function DayEventsModal({ events, date, onClose, onEdit, onDelete
               </div>
             </div>
           ))}
+          {events.length === 0 && (
+            <p className="text-gray-500 dark:text-gray-400 text-sm">No events for this date.</p>
+          )}
         </div>
 
         <div className="flex justify-end mt-4">

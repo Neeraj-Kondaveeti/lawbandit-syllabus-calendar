@@ -1,20 +1,20 @@
-import React, { useState } from "react"
+import React, { useState } from "react";
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
   PlusCircleIcon,
   SunIcon,
   MoonIcon,
-} from "@heroicons/react/24/solid"
-import { motion, AnimatePresence } from "framer-motion"
+} from "@heroicons/react/24/solid";
+import { motion, AnimatePresence } from "framer-motion";
 
 type Props = {
-  currentMonth: number
-  currentYear: number
-  setCurrentMonth: React.Dispatch<React.SetStateAction<number>>
-  setCurrentYear: React.Dispatch<React.SetStateAction<number>>
-  onAddEventClick: () => void
-}
+  currentMonth: number;
+  currentYear: number;
+  setCurrentMonth: React.Dispatch<React.SetStateAction<number>>;
+  setCurrentYear: React.Dispatch<React.SetStateAction<number>>;
+  onAddEventClick: () => void;
+};
 
 const monthNames = [
   "January",
@@ -29,7 +29,7 @@ const monthNames = [
   "October",
   "November",
   "December",
-]
+];
 
 export default function CalendarHeader({
   currentMonth,
@@ -38,36 +38,36 @@ export default function CalendarHeader({
   setCurrentYear,
   onAddEventClick,
 }: Props) {
-  const [darkMode, setDarkMode] = useState(false)
+  const [darkMode, setDarkMode] = useState(false);
 
   const toggleDarkMode = () => {
-    setDarkMode((prev) => !prev)
-    document.documentElement.classList.toggle("dark")
-  }
+    setDarkMode((prev) => !prev);
+    document.documentElement.classList.toggle("dark");
+  };
 
   const prevMonth = () => {
     if (currentMonth === 0) {
-      setCurrentMonth(11)
-      setCurrentYear((y) => y - 1)
+      setCurrentMonth(11);
+      setCurrentYear((y) => y - 1);
     } else {
-      setCurrentMonth((m) => m - 1)
+      setCurrentMonth((m) => m - 1);
     }
-  }
+  };
 
   const nextMonth = () => {
     if (currentMonth === 11) {
-      setCurrentMonth(0)
-      setCurrentYear((y) => y + 1)
+      setCurrentMonth(0);
+      setCurrentYear((y) => y + 1);
     } else {
-      setCurrentMonth((m) => m + 1)
+      setCurrentMonth((m) => m + 1);
     }
-  }
+  };
 
   const goToToday = () => {
-    const today = new Date()
-    setCurrentMonth(today.getMonth())
-    setCurrentYear(today.getFullYear())
-  }
+    const today = new Date();
+    setCurrentMonth(today.getMonth());
+    setCurrentYear(today.getFullYear());
+  };
 
   return (
     <div
@@ -132,5 +132,5 @@ export default function CalendarHeader({
         </button>
       </div>
     </div>
-  )
+  );
 }
