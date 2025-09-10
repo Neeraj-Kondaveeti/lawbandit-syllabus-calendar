@@ -73,9 +73,9 @@ npm install
 ### 3. Configure Environment Variables
 Create a .env file in the root directory:
 ```bash
-VITE_OPENAI_API_KEY=your_openai_api_key_here
-VITE_GOOGLE_CLIENT_ID=your_google_client_id_here
-VITE_GOOGLE_API_KEY=your_google_api_key_here
+VITE_OPENAI_API_KEY = openai_api_key
+VITE_GOOGLE_CLIENT_ID = google_client_id
+VITE_GOOGLE_API_KEY = google_api_key
 ```
 
 ### 4. Start the Development Server 
