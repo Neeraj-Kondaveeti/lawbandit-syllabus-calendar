@@ -1,24 +1,48 @@
-# Lawbandit Syllabus Calendar  
+# 📅 LawBandit Syllabus Calendar  
 
-This project is a **work-in-progress application** that takes a syllabus PDF and parses assignments, exams, and deadlines into a calendar view. The main goal is to make it easier for students to upload their syllabus and automatically see important tasks in a structured calendar.  
+A web application that parses syllabus PDFs into structured events (lectures, assignments, exams, projects, etc.) and displays them in an interactive calendar.  
+Optionally, users can **sync parsed events with Google Calendar** for better scheduling.  
 
-At this stage:  
-- 📂 You can upload a syllabus (PDF).  
-- 🧾 Text is extracted using **pdfjs-dist**.  
-- 🤖 A **mock LLM function** is called (currently is only temporarily setup).  
-- 📅 Events are displayed in a calendar UI with add/edit/delete support.  
-
-⚠️ **Note**: This is not the final version. The LLM integration is mocked right now (inside src/components/SyllabusUpload.tsx) , once an API key is provided, the mock will be replaced with a real API call so the syllabus text is parsed dynamically into events.  
-
-## Present Progress :
-<img width="1462" height="922" alt="image" src="https://github.com/user-attachments/assets/84e70d9a-4ee6-49b5-bec5-677a1a2075f7" />
-
-**Note** This will be further developed , this is only the current stage.
-
+Deployed on **Vercel**: [Live Demo]([https://your-vercel-link.vercel.app](https://lawbandit-syllabus-calendar-eta.vercel.app))  
 
 ---
 
-## 🛠️ How to Run the Application  
+## 🚀 Features  
+- Upload any **syllabus (PDF)** → automatically parsed using an LLM.  
+- Extracted events categorized as: **Lecture, Assignment, Exam, Project, General**.  
+- Interactive calendar UI (with dark mode + add/edit event modals).  
+- One-click **Google Calendar sync** (OAuth2).  
+- Deployed via **Vercel** for instant access.  
+
+---
+
+## 🛠️ Tech Stack  
+- **Frontend**: React + TypeScript + Vite  
+- **Styling**: TailwindCSS + Framer Motion  
+- **PDF Parsing**: pdfjs-dist  
+- **LLM Integration**: OpenAI GPT-4.1-mini  
+- **Calendar API**: Google Calendar API  
+
+---
+
+## 📂 Project Structure  
+
+```bash
+src/
+ ├── components/        # Calendar UI components
+ │   ├── Calendar.tsx
+ │   ├── CalendarHeader.tsx
+ │   ├── DayCell.tsx
+ │   ├── GoogleButton.tsx
+ │   └── SyllabusUpload.tsx
+ ├── utils/             # Utility functions
+ │   └── googleCalendar.ts
+ ├── App.tsx            # Main app container
+ └── main.tsx           # Entry point
+```
+
+
+## ⚙️ Setup Instructions 
 
 ### ✅ Prerequisites  
 Before running the app, make sure you have installed:  
@@ -46,17 +70,25 @@ cd lawbandit-syllabus-calendar
 npm install
 ```
 
-### 3. Start the Development Server 
+### 3. Configure Environment Variables
+Create a .env file in the root directory:
+```bash
+VITE_OPENAI_API_KEY=your_openai_api_key_here
+VITE_GOOGLE_CLIENT_ID=your_google_client_id_here
+VITE_GOOGLE_API_KEY=your_google_api_key_here
+```
+
+### 4. Start the Development Server 
 ```bash
 npm run dev
 ```
 
-### 4. Open the application in your browser 
+### 5. Open the application in your browser 
 ```bash
 http://localhost:5173/
 ```
 
-### 5. Open the app in your browser
+### 6. Open the app in your browser
 After running the dev server, you should see an output like:
 
   ➜  Local:   http://localhost:5173/
@@ -84,29 +116,33 @@ rm -rf node_modules package-lock.json
 npm install
 ```
 
-### 📂 Project Structure
-```bash
-src/
- ├── components/
- │    ├── Calendar.tsx         # Main calendar UI + event state
- │    ├── DayCell.tsx          # Individual calendar cells
- │    ├── SyllabusUpload.tsx   # PDF upload + text extraction + mock LLM call
- │    ├── AddEventModal.tsx    # Modal for adding events
- │    ├── EditEventModal.tsx   # Modal for editing events
- │    └── EventDetailsModal.tsx # Event detail modal
-```
 
-### 🔮 Next Steps
+### 🔑 Google Calendar Integration
 - Replace fetchEventsFromLLM (mock) with a real LLM API call (once API key is available)
-- Expand parsing logic to handle more syllabus formats (dates, ranges, etc.)
-- Optional: integrate with Google Calendar for syncing
+- The app requests the scope:
+  ```bash
+  https://www.googleapis.com/auth/calendar.events
+  ```
+- Once authorized, all parsed syllabus events will be added to the reviewer’s Google Calendar.
 
 
-### Concept 
+### 🧪 Testing the App 
 This repository demonstrates:
-- A working pipeline from PDF upload → text extraction → mock event injection into calendar
-- An event management UI that allows add/edit/delete actions
-- A ready spot for plugging in a real LLM call to complete the end-to-end flow
+- Upload the provided syllabus PDF (/sample_pdfs/Syllabus-1950.pdf or any syllabus).
+- Confirm that events appear in the calendar.
+- Test aroung with Add Event button , dark mode button , and the edit or delete button which appear when you click on the event on the calendar.
+- Click “Sync with Google Calendar” to test integration.
+- Verify events in your Google Calendar.
+
+### 📦 Build for Production
+  ```bash
+  npm run build
+  npm run preview
+  ```
+
+### 🌐 Deployment
+- The project is deployed on Vercel.
+
 
 
 
