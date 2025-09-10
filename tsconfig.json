@@ -2,8 +2,8 @@
   "compilerOptions": {
     "target": "ES2017",
     "lib": ["DOM", "DOM.Iterable", "ES2017"],
-    "module": "ESNext",                 
-    "moduleResolution": "Node",         
+    "module": "ESNext",
+    "moduleResolution": "Node",
     "strict": true,
     "jsx": "react-jsx",
     "allowSyntheticDefaultImports": true,
@@ -14,6 +14,6 @@
     "typeRoots": ["./src/types", "./node_modules/@types"]
   },
   "include": ["src"],
-  "exclude": ["node_modules/vite/**", "node_modules/rollup/**"],
+  "exclude": ["node_modules/vite/**", "node_modules/rollup/**"],  
   "references": [{ "path": "./tsconfig.node.json" }]
 }
