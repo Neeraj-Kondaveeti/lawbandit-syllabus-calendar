@@ -20,7 +20,9 @@ GitHub Repository → [GitHub Link](https://github.com/neeraj-kondaveeti/lawband
 ## 🎥 Demo Preview
 Here’s a quick look at the app in action:
 
-*(Add screenshots or a demo GIF here, e.g., `./assets/demo-calendar.png`)*  
+*## 🎥 Demo Preview
+[▶️ Watch the Demo](./assets/Calendar Application Recording.mp4)
+*  
 
 ---
 
