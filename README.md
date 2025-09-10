@@ -136,15 +136,6 @@ npm install
 - I have included sample syllabus PDFs in the test_files folder:
 - 👉 Upload one of these into the app and confirm that events appear in the calendar.
 
-### 🔑 Google Calendar Integration
-- Replace fetchEventsFromLLM (mock) with a real LLM API call (once API key is available)
-- The app requests the scope:
-  ```bash
-  https://www.googleapis.com/auth/calendar.events
-  ```
-- Once authorized, all parsed syllabus events will be added to the reviewer’s Google Calendar.
-
-
 ### 🧪 Testing the App 
 This repository demonstrates:
 - Upload the provided syllabus PDF (/sample_pdfs/Syllabus-1950.pdf or any syllabus).
