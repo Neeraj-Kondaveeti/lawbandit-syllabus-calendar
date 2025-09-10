@@ -1,16 +1,33 @@
 # 📅 LawBandit Syllabus Calendar  
 
-A web application that parses syllabus PDFs into structured events (lectures, assignments, exams, projects, etc.) and displays them in an interactive calendar.  
+A web application that parses **syllabus PDFs into structured events** (lectures, assignments, exams, projects, etc.) and displays them in an interactive calendar.  
 Optionally, users can **sync parsed events with Google Calendar** for better scheduling.  
 
-Deployed on **Vercel**: [Live Demo](https://lawbandit-syllabus-calendar-eta.vercel.app)
+Deployed on **Vercel** → [Live Demo](https://lawbandit-syllabus-calendar-eta.vercel.app)  
+GitHub Repository → [GitHub Link](https://github.com/neeraj-kondaveeti/lawbandit-syllabus-calendar)  
+
+---
+
+## ✅ Compliance with Requirements
+- ✔️ Written in **TypeScript + Node.js**  
+- ✔️ Deployed on **Vercel**  
+- ✔️ Public GitHub repository  
+- ✔️ Clean, well-documented code  
+- ✔️ README with setup + explanation of approach  
+
+---
+
+## 🎥 Demo Preview
+Here’s a quick look at the app in action:
+
+*(Add screenshots or a demo GIF here, e.g., `./assets/demo-calendar.png`)*  
 
 ---
 
 ## 🚀 Features  
 - Upload any **syllabus (PDF)** → automatically parsed using an LLM.  
 - Extracted events categorized as: **Lecture, Assignment, Exam, Project, General**.  
-- Interactive calendar UI (with dark mode + add/edit event modals).  
+- Interactive calendar UI with dark mode and event modals (add/edit/delete).  
 - One-click **Google Calendar sync** (OAuth2).  
 - Deployed via **Vercel** for instant access.  
 
@@ -40,7 +57,6 @@ src/
  ├── App.tsx            # Main app container
  └── main.tsx           # Entry point
 ```
-
 
 ## ⚙️ Setup Instructions 
 
@@ -116,6 +132,9 @@ rm -rf node_modules package-lock.json
 npm install
 ```
 
+### 🧪 Test Files
+- I have included sample syllabus PDFs in the test_files folder:
+- 👉 Upload one of these into the app and confirm that events appear in the calendar.
 
 ### 🔑 Google Calendar Integration
 - Replace fetchEventsFromLLM (mock) with a real LLM API call (once API key is available)
@@ -133,6 +152,19 @@ This repository demonstrates:
 - Test aroung with Add Event button , dark mode button , and the edit or delete button which appear when you click on the event on the calendar.
 - Click “Sync with Google Calendar” to test integration.
 - Verify events in your Google Calendar.
+
+### 🧩 Approach & Design Choices
+- TypeScript + Node.js: Provides type safety and scalability across both frontend and backend.
+- Modular Components: Calendar is built with reusable TSX components (CalendarHeader, DayCell, etc.).
+- LLM-Powered Parsing: Uses GPT for flexible syllabus parsing, handling varied formats.
+- Google Calendar Integration: Sync parsed events directly to users’ calendars for real-world usability.
+- User-Centric Design: Focused on simplicity → upload once, color-coded events, dark mode, edit options.
+
+### 🌍 Impact on LawBandit
+This project demonstrates how unstructured documents (like syllabi) can be transformed into structured, actionable data.
+- The same approach could be applied to resumes, contracts, or legal case documents.
+- Aligns with LawBandit’s mission of making legal workflows smarter and more efficient.
+- Shows practical synergy of LLMs + structured APIs to improve productivity.
 
 ### 📦 Build for Production
   ```bash
