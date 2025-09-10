@@ -3,7 +3,7 @@
 A web application that parses syllabus PDFs into structured events (lectures, assignments, exams, projects, etc.) and displays them in an interactive calendar.  
 Optionally, users can **sync parsed events with Google Calendar** for better scheduling.  
 
-Deployed on **Vercel**: [Live Demo]([(https://lawbandit-syllabus-calendar-eta.vercel.app))  
+Deployed on **Vercel**: [Live Demo](https://lawbandit-syllabus-calendar-eta.vercel.app)
 
 ---
 
